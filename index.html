@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="UTF-8">
+    <title>Exercice 2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  </head>
+
+  <body ng-controller="mouseEvents" ng-mousedown="onMouseDown()" ng-mouseup="onMouseUp()" ng-mousemove="onMouseMove()">
+    <div  ng-controller="clickOnButton">
+      <button ng-click="save()">Dis coucou</button>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+  </body>
+</html>
+<script>
+  var app = angular.module('app', []);
+  //création d'un controller pour appeler la fonction alert lors du clique sur le bouton
+  app.controller("clickOnButton",function($scope,$window){
+    $scope.save = function(){
+      window.alert("Bonjour Mickael");
+    }
+  });
+  //création d'un controller pour vérifier les action de la souris sur l'ensemble du body
+  app.controller("mouseEvents",function($scope, $rootScope){
+      $scope.onMouseDown = function(){
+          $rootScope.$broadcast("mouseDown");
+          console.log("mouseDown");
+      };
+      $scope.onMouseUp = function(){
+          $rootScope.$broadcast("mouseUp");
+          console.log("mouseUp");
+      };
+      $scope.onMouseMove = function(){
+          $rootScope.$broadcast("mouseMove");
+          console.log("mouseMove");
+      };
+  });
+</script>
